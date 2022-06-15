@@ -1,2 +1,2 @@
 # RustIntro
-Followgin the steps of rust intro tutorial.
+Following the steps of rust intro tutorial.
