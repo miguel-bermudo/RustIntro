@@ -1,0 +1,5 @@
+Cargo operations:
+cargo new {projectname} - creates a new project
+cargo build - builds the exe in build
+cargo run - runs without creating exec
+cargo check - checks for compilation without running
