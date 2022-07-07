@@ -1,5 +1,8 @@
 #![allow(unused)]
 
+mod references;
+mod slices;
+
 pub fn scopes(){
     {                      // s is not valid here, it’s not yet declared
         let s = "hello";   // s is valid from this point forward
@@ -72,10 +75,11 @@ fn takes_and_gives_back(a_string: String) -> String {
     a_string  // a_string is returned and moves out to the calling function
 }
 
-fn calculate_length(s: String) -> (String, usize) {
-    let length = s.len(); // len() returns the length of a String
+fn calculate_length(s: &String) -> usize {
+    // let length = s.len(); // len() returns the length of a String
+    // (s, length)
 
-    (s, length)
+    s.len()
 }
 
 fn main() {
@@ -102,7 +106,34 @@ fn main() {
     // s2 is moved into takes_and_gives_back, which also moves its return value into s3
     let s3 = takes_and_gives_back(s2);  
 
-    let s1 = String::from("hello");
-    let (s2, len) = calculate_length(s1);
-    println!("The length of '{}' is {}.", s2, len);
+    let mut s1 = String::from("hello");
+    let len = calculate_length(&s1);
+    println!("The length of '{}' is {}.", s1, len);
+
+    // let s4 = references::change(&s1); // throws a compile error
+    let s4 = references::change_mut(&mut s1); // we've created a mutable reference to the string and we can now 
+    println!("{}", s4);
+
+    let mut s = String::from("hello world!");
+    //works on string slices if function recieves &str
+    let word = slices::first_word_slice(&s[0..6]);
+    let word = slices::first_word_slice(&s);
+
+    let my_string_literal = "hello world";
+
+    // `first_word` works on slices of string literals, whether partial or whole
+    let word = slices::first_word_slice(&my_string_literal[0..6]);
+    let word = slices::first_word_slice(&my_string_literal[..]);
+
+    // Because string literals *are* string slices already,
+    // this works too, without the slice syntax!
+    let word = slices::first_word_slice(my_string_literal);
+    // s.clear();
+
+    println!("the first word is: {}", word);
+
+    let a = [1, 2, 3, 4, 5];
+    let slice = &a[1..3];
+
+    slices::other_slices(slice)
 }
