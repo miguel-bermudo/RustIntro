@@ -1,3 +1,8 @@
+use std::collections::HashMap;
+
+mod suggested_exercises;
+use suggested_exercises::{exercises};
+
 fn main() {
     // 8.1
     list_of_values_with_vec();
@@ -5,11 +10,77 @@ fn main() {
     utf_8_text_with_string();
     indexing_with_strings(); 
     //8.3
-
+    hashmaps();
+    // exercises:
+    exercises();
 }
 
 fn hashmaps(){
-    // 14, 16, 14, 15, 14, 13
+    // manual insert
+    let mut scores = HashMap::new();
+    scores.insert("Blue", 10);
+    scores.insert("Yellow", 50);
+
+    // zip two vecs into hasmap with collect.
+    let teams = vec!["Blue", "Yellow"];
+    let initial_scores = vec![10, 50];
+
+    // we need to specify hasmap as collect can do so into many types.
+    // using underscores so rust infers the type.
+    let mut scores: HashMap<_, _> = teams.into_iter().zip(initial_scores.into_iter()).collect();
+
+    // hasmaps take ownership of wnything that does not implement the copy trait.
+    let field_name = String::from("Favorite color");
+    let field_value = String::from("Blue");
+
+    let mut map = HashMap::new();
+    map.insert(field_name, field_value);
+    // field_name and field_value are invalid at this point
+    // println!("{}", field_name) // -> moved error.
+
+    // getting values out.
+    let score = scores.get("Blue");
+
+    // in case its not &str and its string.
+    let mut scores = HashMap::new();
+
+    scores.insert(String::from("Blue"), 10);
+    scores.insert(String::from("Yellow"), 50);
+
+    let team_name = String::from("Blue");
+    let score = scores.get(&team_name);// <- pass a reference not the value itself, it returns option.
+    println!("{:?}", score);
+
+    for (key, value) in &scores {
+        println!("{}: {}", key, value);
+    }
+
+    // overwrite a value.
+    scores.insert(String::from("Blue"), 25);
+
+    println!("{:?}", scores);
+
+    // inserting only if value does not exist.
+    // entry also returns a mutable reference to the value if it does insert it.
+    scores.entry(String::from("Green")).or_insert(75); // inserts green
+    scores.entry(String::from("Blue")).or_insert(50); //does nothing, blue stays at 25
+
+    println!("{:?}", scores);
+
+    // updating a value based on the old value.
+    // get entry and if it exists updates the counter value to be += 1
+    // otherwise inserts 0 then updates it to 1.
+
+    let text = "hello world wonderful world";
+    let mut map = HashMap::new();
+
+    for word in text.split_whitespace() {
+        let count = map.entry(word).or_insert(0);
+        *count += 1;
+    }
+    println!("{:?}", map);
+
+
 }
 
 fn indexing_with_strings(){
