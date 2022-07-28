@@ -1,4 +1,3 @@
-
 pub struct Point<T> {
     pub x: T,
     pub y: T,
@@ -37,16 +36,17 @@ impl<X1, Y1> MixedPoint<X1, Y1> {
     }
 }
 
+pub fn largest<T: PartialOrd + Copy>(list: &[T]) -> T { 
+    let mut largest = list[0];
 
-// fn largest<T>(list: &[T]) -> T {
-//     for &item in list {
-//         if item > largest {
-//             largest = item;
-//         }
-//     }
+    for &item in list {
+        if item > largest {
+            largest = item;
+        }
+    }
 
-//     largest
-// }
+    largest
+}
 
 
 fn largest_i32(list: &[i32]) -> i32 {
