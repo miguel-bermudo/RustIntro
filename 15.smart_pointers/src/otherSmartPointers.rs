@@ -29,6 +29,6 @@ pub fn refCells_for_mutability(){
     // similar to box<T> it also holds a single owner but it allows you to mutate references to inmutable variables.
     // RefCell is ONLY for single threaded programs.
 
-    //interior mutability.
+    // Interior mutability.
     
 }
