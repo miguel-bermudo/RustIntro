@@ -1,5 +1,6 @@
 use crate::List::{Cons, Nil};
 use std::rc::Rc;
+use std::cell::RefCell;
 
 
 pub fn referenced_counted_sp(){
@@ -22,13 +23,4 @@ pub fn referenced_counted_sp(){
         println!("count after creating c = {}", Rc::strong_count(&a));
     }
     println!("count after c goes out of scope = {}", Rc::strong_count(&a));
-}   
-
-pub fn refCells_for_mutability(){
-    // refcells bend the rules of rust by allowing us to mutate variables that have inmutable references.
-    // similar to box<T> it also holds a single owner but it allows you to mutate references to inmutable variables.
-    // RefCell is ONLY for single threaded programs.
-
-    // Interior mutability.
-    
 }
