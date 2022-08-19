@@ -1,0 +1,1 @@
+C:\Users\Magic\ Mike\Desktop\RustIntro\17.object_oriented_features\target\debug\object_oriented_features.exe: C:\Users\Magic\ Mike\Desktop\RustIntro\17.object_oriented_features\src\gui.rs C:\Users\Magic\ Mike\Desktop\RustIntro\17.object_oriented_features\src\lib.rs C:\Users\Magic\ Mike\Desktop\RustIntro\17.object_oriented_features\src\main.rs

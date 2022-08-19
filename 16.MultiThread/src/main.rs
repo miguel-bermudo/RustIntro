@@ -1,13 +1,23 @@
+mod shared_state;
+
 use std::iter::Rev;
 use std::thread;
 use std::time::Duration;
 use std::sync::mpsc;
+use shared_state::*;
+
 
 fn main() {
     join_ops();
     move_threads();
     // message_passing();
-    multiple_trans();
+    // multiple_trans();
+
+    //Shared variable with locks.
+    shared_state::scopes();
+    shared_state::thread_sharing();
+
+    shared_state::deadlock();
 }
 
 fn join_ops(){
